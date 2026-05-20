@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dämonen-Königreich - Ashen Crown Onepage</title>
+  <style>
+    :root {
+      --black: #030303;
+      --ink: #090506;
+      --blood: #2a0708;
+      --blood-soft: #170808;
+      --panel: #100909;
+      --panel-line: #302426;
+      --red: #9e1518;
+      --gold: #d5ad5b;
+      --gold-bright: #edc872;
+      --white: #fff9ef;
+      --text: #c7c5c8;
+      --muted: #aaa7ad;
+      --max: 1440px;
+      --content: 1320px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 50% 7%, rgba(86, 10, 10, 0.34), transparent 30%),
+        linear-gradient(180deg, #050303 0%, #090304 34%, #030303 100%);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.78), transparent 22%, transparent 78%, rgba(0, 0, 0, 0.8)),
+        radial-gradient(circle at 50% 0%, rgba(134, 21, 20, 0.22), transparent 48%);
+      z-index: -1;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(var(--max), 100%);
+      margin: 0 auto;
+      background: rgba(3, 3, 3, 0.68);
+      box-shadow: 0 0 80px rgba(0, 0, 0, 0.75);
+    }
+
+    .inner {
+      width: min(var(--content), calc(100% - 68px));
+      margin: 0 auto;
+    }
+
+    .serif {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 700;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      align-items: center;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(20, 2, 2, 0.95) 0%, rgba(35, 6, 8, 0.62) 42%, rgba(20, 2, 2, 0.62) 100%),
+        url("assets/hero-reference.png") center / cover no-repeat;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.52)),
+        radial-gradient(circle at 55% 50%, transparent 0 24%, rgba(0, 0, 0, 0.44) 68%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.04fr 0.96fr;
+      gap: clamp(36px, 7vw, 120px);
+      align-items: center;
+      padding: 58px 0;
+    }
+
+    .crest {
+      width: 176px;
+      height: 190px;
+      margin: 0 0 74px;
+      border: 1px solid rgba(213, 173, 91, 0.22);
+      background: rgba(255, 255, 255, 0.08);
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.86;
+      filter: contrast(1.05) saturate(0.92);
+    }
+
+    .eyebrow {
+      color: var(--gold-bright);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 15px;
+      font-style: italic;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      margin: 26px 0 0;
+      color: var(--white);
+      font-size: clamp(54px, 8vw, 118px);
+      line-height: 0.96;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      text-shadow: 0 28px 60px rgba(0, 0, 0, 0.9);
+    }
+
+    .hero h1 span {
+      display: block;
+      color: #b31e20;
+    }
+
+    .hero-copy {
+      max-width: 660px;
+      margin-top: 28px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(213, 173, 91, 0.34);
+      color: #d9c9b2;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 20px;
+      font-style: italic;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 42px;
+    }
+
+    .btn {
+      min-width: 234px;
+      min-height: 64px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(213, 173, 91, 0.48);
+      color: var(--gold-bright);
+      background: rgba(10, 5, 5, 0.52);
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 0.19em;
+      text-transform: uppercase;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--gold-bright);
+      background: rgba(126, 19, 18, 0.52);
+    }
+
+    .btn-primary {
+      color: var(--white);
+      border-color: rgba(175, 32, 30, 0.64);
+      background: rgba(112, 16, 15, 0.52);
+    }
+
+    .hero-art {
+      align-self: end;
+      width: min(100%, 690px);
+      margin-left: auto;
+      border: 1px solid rgba(213, 173, 91, 0.28);
+      box-shadow: 0 40px 110px rgba(0, 0, 0, 0.6);
+      aspect-ratio: 1.17;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .scroll-note {
+      position: absolute;
+      z-index: 2;
+      left: 50%;
+      bottom: 26px;
+      transform: translateX(-50%);
+      color: rgba(237, 200, 114, 0.82);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 13px;
+      font-style: italic;
+      letter-spacing: 0.5em;
+    }
+
+    .section {
+      padding: 112px 0;
+      border-top: 1px solid rgba(213, 173, 91, 0.16);
+      background: #050505;
+    }
+
+    .section.blood {
+      background:
+        radial-gradient(circle at 50% 5%, rgba(92, 15, 16, 0.36), transparent 28%),
+        linear-gradient(180deg, #240707 0%, #110707 42%, #050505 100%);
+    }
+
+    .section h2 {
+      margin: 0;
+      color: var(--gold);
+      font-size: clamp(43px, 5.4vw, 72px);
+      line-height: 1.1;
+      text-align: center;
+    }
+
+    .lead {
+      max-width: 1100px;
+      margin: 34px auto 0;
+      color: var(--muted);
+      font-size: clamp(20px, 2vw, 28px);
+      line-height: 1.65;
+      text-align: center;
+    }
+
+    .story h2 {
+      text-align: left;
+    }
+
+    .story-copy {
+      max-width: 1250px;
+      margin-top: 44px;
+      color: var(--white);
+      font-size: clamp(20px, 2vw, 28px);
+      line-height: 1.55;
+    }
+
+    .story-copy p {
+      margin: 0 0 34px;
+    }
+
+    .gold-word {
+      color: var(--gold-bright);
+    }
+
+    .story-image {
+      margin-top: 86px;
+      border: 1px solid var(--gold);
+      background: #0b0808;
+      overflow: hidden;
+    }
+
+    .story-image img {
+      width: 100%;
+      height: min(1130px, 80vw);
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .loop-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 38px;
+      margin-top: 86px;
+    }
+
+    .loop-card,
+    .loop-wide {
+      border: 1px solid var(--panel-line);
+      border-top: 5px solid var(--red);
+      background: rgba(13, 8, 8, 0.95);
+    }
+
+    .loop-card {
+      padding: 42px 40px 38px;
+    }
+
+    .loop-card img {
+      width: 100%;
+      aspect-ratio: 1.82;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .loop-card h3,
+    .loop-wide h3 {
+      margin: 44px 0 18px;
+      color: var(--gold);
+      font-size: clamp(28px, 3vw, 41px);
+      line-height: 1.15;
+    }
+
+    .loop-card h3::before,
+    .loop-wide h3::before {
+      content: "";
+      display: inline-block;
+      width: 38px;
+      height: 3px;
+      margin-right: 18px;
+      vertical-align: middle;
+      background: var(--gold);
+    }
+
+    .loop-card p,
+    .loop-wide p {
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(19px, 2vw, 25px);
+      line-height: 1.55;
+    }
+
+    .loop-card strong,
+    .loop-wide strong {
+      color: var(--gold-bright);
+      font-weight: 400;
+    }
+
+    .loop-wide {
+      margin-top: 38px;
+      padding: 42px 40px 48px;
+    }
+
+    .loop-wide img {
+      width: 100%;
+      max-height: 740px;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .reason-list {
+      display: grid;
+      gap: 40px;
+      margin-top: 76px;
+    }
+
+    .reason {
+      padding: 42px 44px 38px;
+      border-left: 6px solid var(--gold);
+      background: #100909;
+    }
+
+    .reason h3 {
+      margin: 0 0 14px;
+      color: var(--white);
+      font-size: clamp(26px, 3vw, 34px);
+      line-height: 1.2;
+      text-shadow: 2px 2px 0 #071f4d;
+    }
+
+    .reason p {
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(20px, 2.1vw, 27px);
+      line-height: 1.55;
+    }
+
+    .prototype-media {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 42px;
+      margin-top: 82px;
+      align-items: center;
+    }
+
+    .prototype-media img {
+      width: 100%;
+      aspect-ratio: 1.95;
+      object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .cta {
+      margin-top: 126px;
+      padding: 118px 0 0;
+      border-top: 1px solid rgba(213, 173, 91, 0.22);
+      background:
+        radial-gradient(circle at 50% 100%, rgba(94, 8, 8, 0.36), transparent 42%);
+      text-align: center;
+    }
+
+    .cta h2 {
+      color: var(--white);
+    }
+
+    .cta p {
+      margin-top: 28px;
+      color: var(--white);
+      font-size: clamp(18px, 2vw, 25px);
+    }
+
+    .wishlist {
+      width: min(1080px, 100%);
+      min-height: 96px;
+      margin: 74px auto 0;
+      border: 1px solid var(--gold);
+      color: var(--gold-bright);
+      background: transparent;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(21px, 2.4vw, 32px);
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    footer {
+      padding: 58px 0;
+      border-top: 1px solid rgba(213, 173, 91, 0.16);
+      color: #685d57;
+      text-align: center;
+      background: #030303;
+    }
+
+    @media (max-width: 980px) {
+      .inner {
+        width: min(var(--content), calc(100% - 36px));
+      }
+
+      .hero-grid,
+      .loop-grid,
+      .prototype-media {
+        grid-template-columns: 1fr;
+      }
+
+      .crest {
+        margin-bottom: 44px;
+      }
+
+      .hero-art {
+        justify-self: start;
+        margin: 10px 0 0;
+      }
+
+      .section {
+        padding: 78px 0;
+      }
+
+      .loop-card,
+      .loop-wide,
+      .reason {
+        padding: 26px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-grid {
+        padding: 38px 0 82px;
+      }
+
+      .crest {
+        width: 118px;
+        height: 128px;
+        margin-bottom: 34px;
+      }
+
+      .eyebrow {
+        font-size: 11px;
+        letter-spacing: 0.3em;
+      }
+
+      .hero-copy,
+      .story-copy,
+      .lead,
+      .loop-card p,
+      .loop-wide p,
+      .reason p {
+        font-size: 18px;
+      }
+
+      .actions,
+      .btn {
+        width: 100%;
+      }
+
+      .section h2 {
+        text-align: left;
+      }
+
+      .lead {
+        text-align: left;
+      }
+
+      .story-image {
+        margin-top: 46px;
+      }
+
+      .story-image img {
+        height: 520px;
+      }
+
+      .scroll-note {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <main>
+      <section class="hero" id="top">
+        <div class="inner hero-grid">
+          <div>
+            <img class="crest" src="assets/crest.png" alt="Dämonen-Königreich Wappen" />
+            <div class="eyebrow">Ein Königreich aus Schatten und Blut</div>
+            <h1 class="serif">Dämonen-<span>Königreich</span></h1>
+            <p class="hero-copy">
+              Herrsche über ein Reich der Finsternis. Treffe Entscheidungen, die über Leben und Tod bestimmen. Dein Wille ist Gesetz - doch das Böse schläft nie.
+            </p>
+            <div class="actions">
+              <a class="btn btn-primary" href="#gameplay">Jetzt spielen</a>
+              <a class="btn" href="#story">Mehr erfahren</a>
+            </div>
+          </div>
+          <img class="hero-art" src="assets/hero-character.png" alt="Junger dämonischer Herrscher auf dem Thron" />
+        </div>
+        <div class="scroll-note">Erkunde das Königreich</div>
+      </section>
+
+      <section class="section story" id="story">
+        <div class="inner">
+          <h2 class="serif">Story &amp; Worldbuilding</h2>
+          <div class="story-copy">
+            <p>
+              Willkommen in <span class="gold-word">Kazarim</span> - einem Imperium, das auf Blut, rücksichtslosem Ehrgeiz und uralten Pakten errichtet wurde. Als neuer Herrscher erbst du nicht nur den Thron, sondern auch die Feinde deines Vaters.
+            </p>
+            <p>
+              Die Welt von Ashen Crown ist durchzogen von moralischen Grauzonen. Rivalisierende Fraktionen lauern auf Schwäche, während komplexe Blutlinien und tief verwurzelte Familiengeheimnisse den Hof spalten. Wirst du die alten Pakte ehren, oder das Reich in deinem eigenen Bild neu formen?
+            </p>
+          </div>
+          <figure class="story-image">
+            <img src="assets/ruler-portrait.png" alt="Herrscherportrait aus Ashen Crown" />
+          </figure>
+        </div>
+      </section>
+
+      <section class="section blood" id="gameplay">
+        <div class="inner">
+          <h2 class="serif">Der Gameplay-Loop</h2>
+          <p class="lead">
+            Zwischen Thronsaal und Schlachtfeld: Ein nahtloser Übergang von beziehungsgetriebener Erzählung zu knallharter Ressourcen-Verwaltung.
+          </p>
+
+          <div class="loop-grid">
+            <article class="loop-card">
+              <img src="assets/throne-shot.png" alt="Audienz im Thronsaal" />
+              <h3 class="serif">Audienz &amp; Entscheidung</h3>
+              <p>
+                Empfange Bittsteller, rivalisierende Lords und Abgesandte in narrativen Segmenten. Jede Wahl beeinflusst das Schicksal des Reiches und deine eigene Verderbnis.
+              </p>
+            </article>
+
+            <article class="loop-card">
+              <img src="assets/throne-shot.png" alt="Rat und Machtzirkel" />
+              <h3 class="serif">Rat &amp; Machtzirkel</h3>
+              <p>
+                Verwalte deine Berater und Minister. Balanciere kritische Ressourcen wie <strong>Gold</strong>, <strong>Food</strong>, <strong>Army</strong>, <strong>Popularity</strong> und <strong>Legitimacy</strong>, um Revolten abzuwenden.
+              </p>
+            </article>
+          </div>
+
+          <article class="loop-wide">
+            <img src="assets/realm-map-shot.png" alt="Strategische Reichskontrolle auf der Karte" />
+            <h3 class="serif">Reichskontrolle</h3>
+            <p>
+              Entsende Truppen, löse strategische Events auf der Knotenpunkt-Weltkarte aus und festige den Einfluss deiner Blutlinie über die verbrannten Ländereien.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="why">
+        <div class="inner">
+          <h2 class="serif">Warum Spieler bleiben</h2>
+          <p class="lead">
+            Ashen Crown kombiniert die stärksten Elemente aus zwei beliebten Genres zu einem einzigartigen Herrschaftserlebnis.
+          </p>
+
+          <div class="reason-list">
+            <article class="reason">
+              <h3 class="serif">Herrschaftsfantasie mit Konsequenzen</h3>
+              <p>Keine Illusion von Kontrolle. Politische Entscheidungen haben spürbare Auswirkungen auf Machtstrukturen und Ressourcen.</p>
+            </article>
+            <article class="reason">
+              <h3 class="serif">Innovativer Genre-Mix</h3>
+              <p>Tiefgründige Visual-Novel-Dialoge gepaart mit den strategischen Herausforderungen eines Kingdom-Management-RPGs.</p>
+            </article>
+            <article class="reason">
+              <h3 class="serif">Komplexe Beziehungsdynamiken</h3>
+              <p>Loyalitäten am Hof sind alles. Beziehungen zu Räten und Familienmitgliedern dienen als Motor für Fortschritt und Intrigen.</p>
+            </article>
+            <article class="reason">
+              <h3 class="serif">Erwachsene Dark-Fantasy</h3>
+              <p>Ein fesselndes Setting abseits der klassischen Heldenreise. Du spielst die Obrigkeit einer brutalen Dämonengesellschaft.</p>
+            </article>
+            <article class="reason">
+              <h3 class="serif">Dein Vermächtnis</h3>
+              <p>Jeder Spieldurchlauf formt einen anderen Königstyp. Brutal, gnädig, korrupt oder weise - deine Taten definieren das Endgame.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="prototype">
+        <div class="inner">
+          <h2 class="serif">Der Prototyp: Bereit für den Thron</h2>
+          <p class="lead">
+            Die grundlegende Architektur der Herrschaft steht. Der aktuelle Prototyp beweist einen flüssigen Wechsel zwischen Thronsaal-Events und strategischer Node-Map - untermauert durch eine bereits stark ausgeprägte visuelle Identität.
+          </p>
+
+          <div class="prototype-media">
+            <img src="assets/prototype-throne.png" alt="Prototyp Screenshot Thronsaal" />
+            <img src="assets/prototype-map.png" alt="Prototyp Screenshot Weltkarte" />
+          </div>
+
+          <div class="cta">
+            <h2 class="serif">Bereit, das Reich zu fordern?</h2>
+            <p>Die Entwicklung von ASHEN CROWN schreitet unaufhaltsam voran. Werde Teil der Aristokratie.</p>
+            <a class="btn wishlist" href="#top">[ CTA-Button / Wishlist-Link hier einfügen ]</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="inner">© 2026 Ashen Crown. Alle Rechte vorbehalten.</div>
+    </footer>
+  </div>
+</body>
+</html>
