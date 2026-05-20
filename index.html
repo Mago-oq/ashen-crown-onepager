@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ashen Crown — Onepage Website</title>
+  <style>
+    :root {
+      --bg: #070405;
+      --bg2: #120909;
+      --panel: rgba(25, 13, 13, 0.82);
+      --panel2: rgba(39, 17, 15, 0.88);
+      --red: #9d241e;
+      --red2: #d34a34;
+      --gold: #d8a84f;
+      --gold2: #ffe0a0;
+      --text: #dac8b6;
+      --muted: #9b8b7e;
+      --line: rgba(216, 168, 79, 0.28);
+      --max: 1180px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 18% 0%, rgba(157, 36, 30, 0.36), transparent 34%),
+        radial-gradient(circle at 82% 10%, rgba(216, 168, 79, 0.14), transparent 28%),
+        linear-gradient(180deg, #0d0607 0%, #080405 52%, #030202 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.5;
+      mask-image: linear-gradient(to bottom, black 0%, transparent 85%);
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,0.72), transparent 20%, transparent 80%, rgba(0,0,0,0.72)),
+        radial-gradient(circle at 50% 110%, rgba(157,36,30,0.22), transparent 36%);
+      z-index: -1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid rgba(216,168,79,0.16);
+      background: rgba(6, 3, 4, 0.72);
+      backdrop-filter: blur(18px);
+    }
+
+    .topbar-inner {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--gold2);
+      font-family: Georgia, serif;
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      color: var(--gold2);
+      border: 1px solid var(--line);
+      background: linear-gradient(145deg, rgba(157,36,30,0.36), rgba(216,168,79,0.08));
+      transform: rotate(45deg);
+    }
+
+    .logo-icon span {
+      transform: rotate(-45deg);
+    }
+
+    .mini-nav {
+      display: flex;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .mini-nav a:hover {
+      color: var(--gold2);
+    }
+
+    .hero {
+      min-height: calc(100vh - 72px);
+      display: grid;
+      grid-template-columns: 1.03fr 0.97fr;
+      align-items: center;
+      gap: 44px;
+      padding: 72px 0 90px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      padding: 9px 13px;
+      border: 1px solid rgba(216,168,79,0.25);
+      background: rgba(216,168,79,0.06);
+      color: var(--gold2);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .tag::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red2);
+      box-shadow: 0 0 16px var(--red2);
+    }
+
+    h1, h2, h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 700;
+    }
+
+    h1 {
+      color: #fff0cf;
+      font-size: clamp(58px, 9vw, 118px);
+      line-height: 0.88;
+      letter-spacing: -0.06em;
+      text-transform: uppercase;
+      text-shadow: 0 24px 60px rgba(0,0,0,0.85);
+    }
+
+    .subtitle {
+      max-width: 650px;
+      margin-top: 26px;
+      color: #d9c5b3;
+      font-size: 19px;
+      line-height: 1.72;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .btn {
+      min-height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 24px;
+      border: 1px solid rgba(216,168,79,0.44);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: transform 0.18s ease, background 0.18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-main {
+      color: #210b08;
+      background: linear-gradient(135deg, var(--gold2), var(--gold));
+      box-shadow: 0 14px 36px rgba(216,168,79,0.18);
+    }
+
+    .btn-ghost {
+      color: var(--gold2);
+      background: rgba(216,168,79,0.06);
+    }
+
+    .keyart {
+      position: relative;
+      min-height: 570px;
+      border: 1px solid rgba(216,168,79,0.26);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.06), transparent 32%),
+        radial-gradient(circle at 50% 26%, rgba(216,168,79,0.18), transparent 19%),
+        radial-gradient(circle at 50% 42%, rgba(157,36,30,0.35), transparent 28%),
+        linear-gradient(145deg, #2a100e, #050303 72%);
+      box-shadow: 0 30px 90px rgba(0,0,0,0.55);
+      overflow: hidden;
+    }
+
+    .keyart::before {
+      content: "";
+      position: absolute;
+      inset: 20px;
+      border: 1px solid rgba(216,168,79,0.15);
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .keyart-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.35) 54%, rgba(0,0,0,0.9) 100%),
+        radial-gradient(circle at 50% 26%, rgba(255,220,150,0.16), transparent 16%),
+        repeating-linear-gradient(90deg, rgba(216,168,79,0.08) 0 2px, transparent 2px 72px),
+        linear-gradient(135deg, #41120e, #0a0505 62%);
+      opacity: 0.94;
+    }
+
+    .crown-shape {
+      position: absolute;
+      left: 50%;
+      top: 78px;
+      width: 230px;
+      height: 170px;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, rgba(216,168,79,0.88), rgba(110,54,22,0.25));
+      clip-path: polygon(0 100%, 12% 30%, 32% 70%, 50% 0, 68% 70%, 88% 30%, 100% 100%);
+      opacity: 0.28;
+      filter: blur(0.3px);
+      z-index: 2;
+    }
+
+    .king-shape {
+      position: absolute;
+      left: 50%;
+      bottom: 72px;
+      width: 230px;
+      height: 360px;
+      transform: translateX(-50%);
+      background:
+        radial-gradient(circle at 50% 8%, #f2d08c 0 10px, transparent 11px),
+        linear-gradient(90deg, transparent 0 26%, rgba(0,0,0,0.88) 26% 74%, transparent 74%),
+        linear-gradient(180deg, rgba(190,54,39,0.86), #100404 68%);
+      clip-path: polygon(43% 0, 57% 0, 65% 13%, 80% 29%, 71% 100%, 29% 100%, 20% 29%, 35% 13%);
+      box-shadow: 0 0 70px rgba(157,36,30,0.5);
+      opacity: 0.86;
+      z-index: 3;
+    }
+
+    .keyart-caption {
+      position: absolute;
+      left: 34px;
+      right: 34px;
+      bottom: 34px;
+      z-index: 5;
+      padding: 22px;
+      border: 1px solid rgba(216,168,79,0.24);
+      background: rgba(8, 4, 4, 0.78);
+      backdrop-filter: blur(14px);
+    }
+
+    .keyart-caption h2 {
+      color: var(--gold2);
+      font-size: 25px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+
+    .keyart-caption p {
+      color: #c9b7a8;
+      line-height: 1.58;
+      font-size: 14px;
+    }
+
+    .section {
+      padding: 86px 0;
+      border-top: 1px solid rgba(216,168,79,0.12);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 30px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    .kicker {
+      color: var(--red2);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      color: #ffe6b6;
+      font-size: clamp(34px, 4.6vw, 62px);
+      line-height: 0.95;
+      letter-spacing: -0.035em;
+      text-transform: uppercase;
+    }
+
+    .section-text {
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 15px;
+    }
+
+    .pitch-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+    }
+
+    .pitch-card {
+      min-height: 320px;
+      padding: 32px;
+      border: 1px solid rgba(216,168,79,0.22);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.045), transparent),
+        radial-gradient(circle at 12% 10%, rgba(157,36,30,0.22), transparent 30%),
+        var(--panel);
+      box-shadow: 0 22px 60px rgba(0,0,0,0.28);
+    }
+
+    .pitch-card h3 {
+      color: var(--gold2);
+      font-size: 31px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .pitch-card p {
+      max-width: 780px;
+      color: #ccb9aa;
+      line-height: 1.75;
+      font-size: 17px;
+    }
+
+    .facts {
+      display: grid;
+      gap: 12px;
+    }
+
+    .fact {
+      padding: 20px;
+      border: 1px solid rgba(216,168,79,0.18);
+      background: rgba(12, 6, 6, 0.75);
+    }
+
+    .fact span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    .fact strong {
+      color: #f5d9a8;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .pillar {
+      min-height: 245px;
+      padding: 25px;
+      border: 1px solid rgba(216,168,79,0.21);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), transparent),
+        rgba(18, 9, 9, 0.82);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .pillar:hover {
+      transform: translateY(-6px);
+      border-color: rgba(216,168,79,0.55);
+    }
+
+    .pillar-number {
+      color: rgba(216,168,79,0.45);
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      margin-bottom: 34px;
+    }
+
+    .pillar h3 {
+      color: var(--gold2);
+      font-size: 27px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .pillar p {
+      color: #bba99a;
+      line-height: 1.63;
+      font-size: 14px;
+    }
+
+    .gameplay {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 20px;
+    }
+
+    .mockup {
+      min-height: 520px;
+      padding: 26px;
+      border: 1px solid rgba(216,168,79,0.22);
+      background:
+        radial-gradient(circle at 30% 20%, rgba(157,36,30,0.24), transparent 32%),
+        rgba(18, 9, 9, 0.82);
+      box-shadow: 0 20px 70px rgba(0,0,0,0.32);
+    }
+
+    .map {
+      position: relative;
+      height: 100%;
+      min-height: 468px;
+      border: 1px solid rgba(216,168,79,0.16);
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.025), rgba(0,0,0,0.6)),
+        radial-gradient(circle at 45% 40%, rgba(216,168,79,0.14), transparent 23%),
+        linear-gradient(135deg, #24100e, #060303 72%);
+    }
+
+    .path {
+      position: absolute;
+      height: 2px;
+      background: rgba(216,168,79,0.25);
+      transform-origin: left center;
+    }
+
+    .path.a { width: 210px; left: 90px; top: 150px; transform: rotate(18deg); }
+    .path.b { width: 185px; left: 235px; top: 245px; transform: rotate(-25deg); }
+    .path.c { width: 150px; left: 95px; top: 300px; transform: rotate(-8deg); }
+    .path.d { width: 170px; left: 292px; top: 325px; transform: rotate(22deg); }
+
+    .node {
+      position: absolute;
+      width: 78px;
+      height: 78px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      border-radius: 50%;
+      border: 1px solid rgba(216,168,79,0.42);
+      background: rgba(9,5,5,0.88);
+      color: var(--gold2);
+      font-size: 10px;
+      line-height: 1.25;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: 0 0 28px rgba(157,36,30,0.2);
+    }
+
+    .node.one { left: 58px; top: 105px; }
+    .node.two { left: 305px; top: 182px; }
+    .node.three { left: 94px; top: 314px; }
+    .node.four { right: 70px; bottom: 75px; border-color: rgba(211,74,52,0.72); color: #ffb2a6; }
+
+    .features {
+      display: grid;
+      gap: 12px;
+    }
+
+    .feature {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 18px;
+      padding: 22px;
+      border: 1px solid rgba(216,168,79,0.18);
+      background: var(--panel);
+    }
+
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      display: grid;
+      place-items: center;
+      color: var(--gold2);
+      border: 1px solid rgba(216,168,79,0.28);
+      background: rgba(216,168,79,0.06);
+      font-size: 22px;
+    }
+
+    .feature h3 {
+      color: #f8dcaa;
+      font-size: 22px;
+      margin-bottom: 7px;
+    }
+
+    .feature p {
+      color: #ac9b8d;
+      line-height: 1.62;
+      font-size: 14px;
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr 0.9fr;
+      gap: 16px;
+    }
+
+    .shot {
+      position: relative;
+      min-height: 250px;
+      border: 1px solid rgba(216,168,79,0.2);
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, transparent, rgba(0,0,0,0.78)),
+        radial-gradient(circle at 50% 40%, rgba(157,36,30,0.25), transparent 32%),
+        #150909;
+    }
+
+    .shot.big {
+      min-height: 516px;
+      grid-row: span 2;
+    }
+
+    .shot::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px solid rgba(216,168,79,0.12);
+    }
+
+    .shot::after {
+      content: attr(data-label);
+      position: absolute;
+      left: 22px;
+      bottom: 22px;
+      color: var(--gold2);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .shot.one {
+      background:
+        linear-gradient(180deg, transparent, rgba(0,0,0,0.82)),
+        radial-gradient(circle at 50% 28%, rgba(216,168,79,0.18), transparent 18%),
+        linear-gradient(135deg, #38100d, #070303 70%);
+    }
+
+    .shot.two {
+      background:
+        linear-gradient(180deg, transparent, rgba(0,0,0,0.82)),
+        radial-gradient(circle at 28% 48%, rgba(157,36,30,0.32), transparent 22%),
+        linear-gradient(135deg, #221211, #060303 70%);
+    }
+
+    .shot.three {
+      background:
+        linear-gradient(180deg, transparent, rgba(0,0,0,0.82)),
+        radial-gradient(circle at 72% 40%, rgba(216,168,79,0.15), transparent 20%),
+        linear-gradient(135deg, #151318, #060303 70%);
+    }
+
+    .quote {
+      margin-top: 30px;
+      padding: 34px;
+      border: 1px solid rgba(216,168,79,0.24);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(157,36,30,0.22), transparent 35%),
+        var(--panel2);
+      text-align: center;
+    }
+
+    .quote p {
+      max-width: 900px;
+      margin: 0 auto;
+      color: #f4d8a6;
+      font-family: Georgia, serif;
+      font-size: clamp(24px, 3.2vw, 42px);
+      line-height: 1.25;
+    }
+
+    .contact {
+      padding: 86px 0 42px;
+      border-top: 1px solid rgba(216,168,79,0.12);
+    }
+
+    .contact-box {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: center;
+      padding: 34px;
+      border: 1px solid rgba(216,168,79,0.25);
+      background:
+        radial-gradient(circle at 8% 10%, rgba(157,36,30,0.28), transparent 30%),
+        rgba(14, 7, 7, 0.86);
+    }
+
+    .contact h2 {
+      color: #ffe6b6;
+      font-size: clamp(34px, 4.5vw, 62px);
+      line-height: 0.95;
+      letter-spacing: -0.035em;
+      text-transform: uppercase;
+    }
+
+    .contact p {
+      max-width: 680px;
+      margin-top: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .copyright {
+      margin-top: 26px;
+      text-align: center;
+      color: #66584f;
+      font-size: 12px;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .section-head,
+      .pitch-grid,
+      .gameplay,
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+
+      .pillars {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .media-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .shot.big {
+        grid-column: span 2;
+        grid-row: auto;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .topbar-inner {
+        height: auto;
+        padding: 16px 0;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .mini-nav {
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .hero {
+        padding: 48px 0 70px;
+      }
+
+      .keyart {
+        min-height: 460px;
+      }
+
+      .pillars,
+      .media-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .shot.big {
+        grid-column: auto;
+      }
+
+      .feature {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="logo" href="#top">
+        <div class="logo-icon"><span>♛</span></div>
+        <span>Ashen Crown</span>
+      </a>
+
+      <nav class="mini-nav" aria-label="Page navigation">
+        <a href="#pitch">Pitch</a>
+        <a href="#pillars">Pillars</a>
+        <a href="#gameplay">Gameplay</a>
+        <a href="#media">Media</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="wrap hero">
+      <div>
+        <div class="tag">Dark Fantasy Visual Novel / Kingdom Simulator</div>
+        <h1>Ashen Crown</h1>
+        <p class="subtitle">
+          Rule a collapsing demon empire through audience decisions, minister debates, resource pressure and war. Save your realm from rebellion — or become the tyrant everyone feared you would be.
+        </p>
+        <div class="buttons">
+          <a class="btn btn-main" href="#pitch">Read the Pitch</a>
+          <a class="btn btn-ghost" href="#media">View Media</a>
+        </div>
+      </div>
+
+      <div class="keyart" aria-label="Ashen Crown key art placeholder">
+        <div class="keyart-bg"></div>
+        <div class="crown-shape"></div>
+        <div class="king-shape"></div>
+        <div class="keyart-caption">
+          <h2>Rule or Burn</h2>
+          <p>A young demon ruler inherits a realm on the edge of civil war. Every choice shifts loyalty, fear, legitimacy and survival.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="pitch" class="wrap section">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Elevator Pitch</div>
+          <h2 class="section-title">A crown made of ash</h2>
+        </div>
+        <p class="section-text">
+          This is the clean onepager structure: one page, one scroll, no separate pages. Each block has one job and should be readable in a few seconds.
+        </p>
+      </div>
+
+      <div class="pitch-grid">
+        <article class="pitch-card">
+          <h3>What is the game?</h3>
+          <p>
+            Ashen Crown is a dark fantasy visual novel and kingdom simulator where you play as a young demon ruler trying to save a broken empire. You hear petitions, negotiate with ministers, manage resources, command armies and decide whether mercy, fear or pragmatism will hold the realm together.
+          </p>
+        </article>
+
+        <aside class="facts">
+          <div class="fact">
+            <span>Genre</span>
+            <strong>Visual Novel + Kingdom Sim</strong>
+          </div>
+          <div class="fact">
+            <span>Perspective</span>
+            <strong>Young Demon Ruler</strong>
+          </div>
+          <div class="fact">
+            <span>Core Conflict</span>
+            <strong>Civil War + Collapse</strong>
+          </div>
+          <div class="fact">
+            <span>Tone</span>
+            <strong>Dark Fantasy + Political Drama</strong>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="pillars" class="wrap section">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Core Pillars</div>
+          <h2 class="section-title">What the player does</h2>
+        </div>
+        <p class="section-text">
+          For a real studio page, keep this sharp. Four pillars are enough. More than that starts to feel like a design document.
+        </p>
+      </div>
+
+      <div class="pillars">
+        <article class="pillar">
+          <div class="pillar-number">01</div>
+          <h3>Rule</h3>
+          <p>Hear petitions, answer nobles, judge crises and shape how the court sees your reign.</p>
+        </article>
+
+        <article class="pillar">
+          <div class="pillar-number">02</div>
+          <h3>Debate</h3>
+          <p>Bring complex issues to the minister council, where characters argue, advise and manipulate.</p>
+        </article>
+
+        <article class="pillar">
+          <div class="pillar-number">03</div>
+          <h3>Survive</h3>
+          <p>Balance money, food, legitimacy, loyalty and unrest before the empire breaks apart.</p>
+        </article>
+
+        <article class="pillar">
+          <div class="pillar-number">04</div>
+          <h3>Conquer</h3>
+          <p>Move armies across a node map, defend provinces and fight for control of the realm.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="gameplay" class="wrap section">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Gameplay Loop</div>
+          <h2 class="section-title">Choices become pressure</h2>
+        </div>
+        <p class="section-text">
+          The page should show one visual idea of the game loop. Here it is represented by a map mockup and feature cards.
+        </p>
+      </div>
+
+      <div class="gameplay">
+        <div class="mockup">
+          <div class="map">
+            <div class="path a"></div>
+            <div class="path b"></div>
+            <div class="path c"></div>
+            <div class="path d"></div>
+            <div class="node one">Capital</div>
+            <div class="node two">Port</div>
+            <div class="node three">Fortress</div>
+            <div class="node four">Enemy<br />Province</div>
+          </div>
+        </div>
+
+        <div class="features">
+          <article class="feature">
+            <div class="feature-icon">⚖</div>
+            <div>
+              <h3>Audience Hall</h3>
+              <p>Fast decisions with incomplete information. Save time, take risks and face consequences later.</p>
+            </div>
+          </article>
+
+          <article class="feature">
+            <div class="feature-icon">♜</div>
+            <div>
+              <h3>Minister Council</h3>
+              <p>Deferred problems become deeper debates where advisors reveal context, bias and political cost.</p>
+            </div>
+          </article>
+
+          <article class="feature">
+            <div class="feature-icon">✦</div>
+            <div>
+              <h3>Branching Drama</h3>
+              <p>Family conflict, civil war and visions of possible futures create multiple story paths and endings.</p>
+            </div>
+          </article>
+
+          <article class="feature">
+            <div class="feature-icon">⚔</div>
+            <div>
+              <h3>Strategic Map</h3>
+              <p>Provinces, armies and locations turn political choices into visible territorial pressure.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="media" class="wrap section">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Media</div>
+          <h2 class="section-title">Screenshots and art</h2>
+        </div>
+        <p class="section-text">
+          Replace these blocks later with real screenshots, key art, GIFs or UI mockups. A onepager needs only a few strong visuals.
+        </p>
+      </div>
+
+      <div class="media-grid">
+        <div class="shot big one" data-label="Throne Room"></div>
+        <div class="shot two" data-label="Audience Hall"></div>
+        <div class="shot three" data-label="Node Map"></div>
+        <div class="shot three" data-label="Minister Council"></div>
+        <div class="shot two" data-label="Character Drama"></div>
+      </div>
+
+      <div class="quote">
+        <p>“Can you save the realm without becoming the monster your enemies already see?”</p>
+      </div>
+    </section>
+
+    <section id="contact" class="wrap contact">
+      <div class="contact-box">
+        <div>
+          <h2>Follow the Crown</h2>
+          <p>
+            Add Steam, Discord, Press Kit, email or team links here. This final block should make the page feel complete and usable for recruiting, outreach or funding contacts.
+          </p>
+        </div>
+        <a class="btn btn-main" href="mailto:contact@example.com">Contact</a>
+      </div>
+      <p class="copyright">© 2026 Ashen Crown Team. All rights reserved.</p>
+    </section>
+  </main>
+</body>
+</html>
